@@ -1,3 +1,4 @@
+import base64
 from pathlib import Path
 
 import streamlit as st
@@ -10,9 +11,10 @@ st.set_page_config(
 )
 
 html = Path("dist/index.html").read_text(encoding="utf-8")
+image_b64 = Path("dist/table-background.jpg.b64").read_text(encoding="ascii")
 html = html.replace(
     'src="table-background.png"',
-    'src="https://gaztelubide-chema-belen.cestola.chatgpt.site/table-background.png"',
+    f'src="data:image/jpeg;base64,{image_b64}"',
 )
 html = html.replace(
     "<style>",
