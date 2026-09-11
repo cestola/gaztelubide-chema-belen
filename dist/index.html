@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4eee4" />
+    <meta name="description" content="Una comida entre amigos en Gaztelubide, Las Rozas. Mañana a las 14:30." />
+    <meta property="og:title" content="Comemos juntos · Gaztelubide" />
+    <meta property="og:description" content="Mañana a las 14:30 en Las Rozas. Guarda el plan y ven con hambre." />
+    <meta property="og:type" content="website" />
+    <title>Comemos juntos · Gaztelubide</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23e86345'/%3E%3Ccircle cx='32' cy='31' r='16' fill='none' stroke='%23fff7ec' stroke-width='4'/%3E%3Cpath d='M20 16v30M44 16v30M17 16v11M23 16v11M41 16v11M47 16v11' fill='none' stroke='%23fff7ec' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <style>
+      :root {
+        --paper: #f4eee4;
+        --ink: #20332b;
+        --muted: #6e756d;
+        --coral: #e86345;
+        --yellow: #f2c56b;
+        --sage: #c6d1bd;
+        --line: rgba(32, 51, 43, .16);
+        --serif: Georgia, 'Times New Roman', serif;
+        --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); overflow-x: hidden; }
+      a { color: inherit; }
+      .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+      .eyebrow { margin: 0 0 14px; font-size: .72rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--coral); }
+      .serif { font-family: var(--serif); font-weight: 400; letter-spacing: -.045em; }
+      .nav { position: absolute; z-index: 5; top: 0; left: 0; right: 0; padding: 22px 0; }
+      .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+      .brand { font-family: var(--serif); font-size: 1.1rem; text-decoration: none; }
+      .nav-link { font-size: .82rem; font-weight: 700; text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 4px; }
+      .hero { position: relative; min-height: 100svh; display: grid; align-items: center; padding: 104px 0 56px; overflow: hidden; }
+      .hero::before { content: ''; position: absolute; width: 54vw; height: 54vw; max-width: 660px; max-height: 660px; right: -8vw; top: 9vh; border-radius: 50%; background: var(--yellow); opacity: .92; }
+      .hero::after { content: ''; position: absolute; width: 25vw; height: 25vw; max-width: 300px; max-height: 300px; left: -8vw; top: 16vh; border-radius: 50%; background: var(--sage); opacity: .8; }
+      .hero-content { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 760px); justify-content: center; }
+      .hero h1 { max-width: 720px; margin: 0; font-size: clamp(4rem, 10vw, 8.7rem); line-height: .82; }
+      .hero h1 em { color: var(--coral); font-style: normal; }
+      .intro { max-width: 340px; margin: 0 0 10px auto; font-size: 1.04rem; line-height: 1.55; }
+      .date-lockup { display: flex; gap: 16px; align-items: center; margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line); }
+      .date-day { font-family: var(--serif); font-size: 3rem; line-height: .9; }
+      .date-copy { font-size: .82rem; line-height: 1.35; color: var(--muted); }
+      .date-copy strong { display: block; color: var(--ink); font-size: 1rem; }
+      .invite-card { position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; overflow: hidden; color: var(--ink); background: #dbc19e; text-decoration: none; box-shadow: 0 20px 50px rgba(32,51,43,.14); transition: transform .25s ease, box-shadow .25s ease; }
+      .invite-card:hover, .invite-card:focus-visible { transform: translateY(-4px) rotate(-.5deg); box-shadow: 0 28px 70px rgba(32,51,43,.22); }
+      .invite-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .invite-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(244,238,228,.18) 0%, rgba(244,238,228,.04) 42%, rgba(32,51,43,.28) 100%); }
+      .invite-copy { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(22px, 5vw, 52px); }
+      .invite-top { display: flex; align-items: start; justify-content: space-between; gap: 20px; }
+      .invite-tag { display: inline-flex; min-height: 32px; align-items: center; padding: 0 10px; background: var(--coral); color: #fff7ec; font-size: .68rem; letter-spacing: .13em; text-transform: uppercase; font-weight: 800; }
+      .invite-mark { font-family: var(--serif); font-size: 1.1rem; }
+      .invite-title { max-width: 530px; margin: 0; font-size: clamp(3.3rem, 9vw, 7.8rem); line-height: .82; }
+      .invite-title em { color: var(--coral); font-style: normal; }
+      .invite-bottom { position: absolute; top: 22%; left: clamp(22px, 5vw, 52px); max-width: min(530px, 62%); }
+      .invite-guests { margin: 0 0 14px; font-family: var(--serif); font-size: clamp(1.6rem, 4vw, 2.8rem); line-height: .95; }
+      .invite-details { display: flex; flex-wrap: wrap; gap: 7px 18px; margin: 0; font-size: .8rem; line-height: 1.45; font-weight: 800; }
+      .invite-address { max-width: 330px; margin: 10px 0 0; font-size: .73rem; line-height: 1.35; }
+      .invite-hint { display: inline-block; margin-top: 18px; padding-bottom: 4px; border-bottom: 1px solid currentColor; font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 800; }
+      .scroll-note { position: absolute; right: 0; bottom: 54px; font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; writing-mode: vertical-rl; color: var(--muted); }
+      .section { padding: 112px 0; }
+      .section-head { display: flex; align-items: end; justify-content: space-between; gap: 32px; margin-bottom: 42px; }
+      .section h2 { margin: 0; font-size: clamp(2.8rem, 6vw, 5.8rem); line-height: .88; }
+      .section-lede { max-width: 320px; margin: 0; line-height: 1.55; color: var(--muted); }
+      .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+      .info-card { min-height: 205px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--line); }
+      .info-card:nth-child(2) { background: var(--sage); border-color: transparent; }
+      .info-card:nth-child(3) { background: var(--coral); color: #fff7ec; border-color: transparent; }
+      .card-label { font-size: .7rem; text-transform: uppercase; letter-spacing: .14em; font-weight: 800; }
+      .card-value { margin: 26px 0 0; font-family: var(--serif); font-size: 2rem; line-height: .98; }
+      .card-small { margin: 8px 0 0; font-size: .84rem; line-height: 1.4; opacity: .78; }
+      .menu-band { background: var(--ink); color: var(--paper); }
+      .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+      .menu-grid h2 { max-width: 600px; }
+      .menu-note { max-width: 370px; line-height: 1.6; color: rgba(244, 238, 228, .72); }
+      .menu-source { margin: 20px 0 0; font-size: .74rem; line-height: 1.45; color: rgba(244, 238, 228, .55); }
+      .button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 10px; padding: 0 19px; margin-top: 24px; border: 1px solid currentColor; border-radius: 999px; text-decoration: none; font-size: .82rem; font-weight: 800; transition: transform .2s ease, background .2s ease, color .2s ease; }
+      .button:hover, .button:focus-visible { transform: translateY(-2px); background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
+      .button-light { color: var(--paper); }
+      .location { background: var(--yellow); }
+      .location-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 72px; align-items: center; }
+      .address { margin: 26px 0 0; font-size: 1.15rem; line-height: 1.45; }
+      .map-card { min-height: 330px; position: relative; overflow: hidden; background: #e8b854; border: 1px solid rgba(32,51,43,.22); }
+      .map-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(25deg, transparent 47%, rgba(32,51,43,.24) 48%, rgba(32,51,43,.24) 49%, transparent 50%), linear-gradient(150deg, transparent 49%, rgba(32,51,43,.18) 50%, transparent 51%); background-size: 115px 92px, 170px 138px; transform: rotate(-8deg) scale(1.2); }
+      .map-pin { position: absolute; top: 50%; left: 50%; width: 66px; height: 66px; display: grid; place-items: center; transform: translate(-50%, -50%) rotate(-8deg); background: var(--coral); border: 8px solid var(--paper); border-radius: 50% 50% 50% 0; box-shadow: 0 8px 0 rgba(32,51,43,.14); }
+      .map-pin::after { content: ''; width: 13px; height: 13px; border-radius: 50%; background: var(--paper); }
+      .map-caption { position: absolute; left: 18px; bottom: 17px; padding: 8px 10px; background: var(--paper); font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+      footer { padding: 26px 0 34px; background: var(--paper); }
+      .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; border-top: 1px solid var(--line); padding-top: 20px; color: var(--muted); font-size: .75rem; }
+      .footer-inner a { color: var(--ink); font-weight: 800; text-decoration: none; }
+      .reveal { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+      @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+      @media (max-width: 760px) {
+        .wrap { width: min(100% - 32px, 560px); }
+        .nav { padding-top: 18px; }
+        .hero { min-height: 100svh; padding: 96px 0 34px; }
+        .hero::before { width: 92vw; height: 92vw; right: -24vw; top: 17vh; }
+        .hero::after { width: 48vw; height: 48vw; left: -22vw; top: 11vh; }
+        .hero-content, .menu-grid, .location-grid { grid-template-columns: 1fr; gap: 28px; }
+        .invite-card { aspect-ratio: 4 / 5; }
+        .invite-title { font-size: clamp(3.2rem, 16vw, 6rem); }
+        .invite-bottom { top: 22%; max-width: 82%; }
+        .invite-guests { font-size: clamp(1.9rem, 8vw, 2.8rem); }
+        .invite-details { font-size: .88rem; }
+        .invite-address { font-size: .8rem; }
+        .invite-hint { font-size: .74rem; }
+        .invite-address { max-width: 250px; }
+        .scroll-note { display: none; }
+        .section { padding: 78px 0; }
+        .section-head { display: block; margin-bottom: 28px; }
+        .section-lede { margin-top: 22px; }
+        .info-grid { grid-template-columns: 1fr; }
+        .info-card { min-height: 150px; }
+        .card-value { margin-top: 18px; }
+        .menu-grid h2 { max-width: 500px; }
+        .map-card { min-height: 280px; }
+        .footer-inner { align-items: flex-start; flex-direction: column; }
+      }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+    </style>
+  </head>
+  <body>
+    <header class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#inicio">Gaztelubide / Las Rozas</a>
+        <a class="nav-link" href="#lugar">Cómo llegar ↗</a>
+      </div>
+    </header>
+
+    <main>
+      <section id="inicio" class="hero">
+        <div class="wrap hero-content">
+          <a class="invite-card reveal" href="https://www.google.com/maps/search/?api=1&query=40.5087207,-3.9155497" target="_blank" rel="noreferrer" aria-label="Invitación para Belén y Chema: comida mañana sábado 12 de septiembre a las 14:30 en Gaztelubide, Las Rozas. Abrir ubicación en Google Maps">
+            <img src="table-background.png" alt="Mesa preparada con pan, aceitunas, flores y una copa de vino" />
+            <span class="invite-copy">
+              <span class="invite-top"><span class="invite-tag">Invitación especial</span><span class="invite-mark">Gaztelubide<br />Las Rozas</span></span>
+              <span class="invite-bottom"><span class="invite-guests">Belén y Chema,<br />mañana comemos.</span><span class="invite-details"><span>SÁBADO 12 SEPT.</span><span>14:30 H</span></span><span class="invite-address">Carretera de Las Rozas – El Escorial, km 5 · 28230 Las Rozas de Madrid</span><span class="invite-hint">Toca la invitación · abrir ubicación ↗</span></span>
+            </span>
+          </a>
+        </div>
+        <span class="scroll-note">baja para ver el plan ↓</span>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <div class="section-head">
+            <div><p class="eyebrow">La ficha del plan</p><h2 class="serif">Todo lo<br />importante.</h2></div>
+            <p class="section-lede">Pocas instrucciones, cero complicaciones. Solo hay que llegar, sentarse y disfrutar.</p>
+          </div>
+          <div class="info-grid">
+            <article class="info-card"><div class="card-label">Cuándo</div><div><p class="card-value">Mañana</p><p class="card-small">Sábado, 12 de septiembre<br />A las 14:30 h</p></div></article>
+            <article class="info-card"><div class="card-label">Dónde</div><div><p class="card-value">Gaztelubide</p><p class="card-small">Las Rozas de Madrid<br />Restaurante & sidrería</p></div></article>
+            <article class="info-card"><div class="card-label">Dress code</div><div><p class="card-value">Ven como eres</p><p class="card-small">Pero con ganas de comer<br />y de alargar la sobremesa.</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="menu" class="section menu-band">
+        <div class="wrap menu-grid">
+          <div><p class="eyebrow" style="color:var(--yellow)">Sobre la mesa</p><h2 class="serif">Cocina vasca,<br />buen producto<br />y sobremesa.</h2></div>
+          <div><p class="menu-note">La carta oficial de Gaztelubide está en su web, con sus propuestas de restaurante, sidrería y postres. Mejor consultarla justo antes de salir para ver la versión vigente.</p><a class="button button-light" href="https://grupogaztelubide.com/carta/" target="_blank" rel="noreferrer">Ver la carta oficial <span aria-hidden="true">↗</span></a><p class="menu-source">Fuente: web oficial de Restaurante Gaztelubide.</p></div>
+        </div>
+      </section>
+
+      <section id="lugar" class="section location">
+        <div class="wrap location-grid">
+          <div><p class="eyebrow">El punto de encuentro</p><h2 class="serif">Nos vemos<br />allí.</h2><p class="address">Carretera de Las Rozas – El Escorial, km 5<br />28230 Las Rozas de Madrid</p><a class="button" href="https://www.google.com/maps/search/?api=1&query=40.5087207,-3.9155497" target="_blank" rel="noreferrer">Abrir en Google Maps <span aria-hidden="true">↗</span></a></div>
+          <a class="map-card" href="https://www.google.com/maps/search/?api=1&query=40.5087207,-3.9155497" target="_blank" rel="noreferrer" aria-label="Abrir la ubicación de Gaztelubide en Google Maps"><span class="map-pin" aria-hidden="true"></span><span class="map-caption">Gaztelubide · Las Rozas</span></a>
+        </div>
+      </section>
+    </main>
+
+    <footer><div class="wrap footer-inner"><span>Hecho para una comida que merece la pena.</span><a href="#inicio">Volver arriba ↑</a></div></footer>
+  </body>
+</html>
